@@ -2,28 +2,28 @@ version: "3"
 
 services:
   db:
-    container_name: laravel_db_dev
+    container_name: twitter_db_dev
     build:
       context: ./db
     ports:
       - 3306:3306
     volumes:
-      - laravel-db:/var/lib/mysql
+      - twitter-db:/var/lib/mysql
     environment:
-      - MYSQL_DATABASE=laravel
-      - MYSQL_USER=laravel
+      - MYSQL_DATABASE=twitter
+      - MYSQL_USER=twitter
       - MYSQL_PASSWORD=password
       - MYSQL_ROOT_PASSWORD=password
     platform: linux/x86_64
   app:
-    container_name: laravel_app_dev
+    container_name: twitter_app_dev
     build:
       context: ./app
     volumes:
       - ../src:/work/backend
     depends_on: ["db"]
   web:
-    container_name: laravel_web_dev
+    container_name: twitter_web_dev
     build:
       context: ./web
     ports:
@@ -33,4 +33,4 @@ services:
     depends_on: ["app"]
 
 volumes:
-  laravel-db:
+  twitter-db:
